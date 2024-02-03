@@ -1,7 +1,13 @@
 version: '3.1'
 services:
+  app:
+    ports:
+      - 14445:14445
+    build: .
+    volumes:
+      - ./app:/app      
   db_mysql:
-    image: mysql:5.7
+    image: amd64/mysql:5.6
     environment:
       MYSQL_USER: ${DATABASE_USERNAME}
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
@@ -9,6 +15,8 @@ services:
       MYSQL_DATABASE: ${DATABASE_NAME}
     volumes:
       - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
